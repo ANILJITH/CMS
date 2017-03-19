@@ -1,0 +1,81 @@
+/* 2.1 =Splitter
+---------------------------------------------------------------------- */
+#filter{
+	
+}
+
+.splitter {
+	clear:both;
+	
+}
+.splitter:after {
+	content: "";
+	display: block;
+	height: 0;
+	overflow: hidden;
+	clear: both;
+	
+}
+
+.splitter ul li a {
+		padding:10px 20px;
+	
+}
+.splitter li, .splitter ul, .splitter ul li a {
+	display: inline;
+	display: inline-block;
+	line-height: 1;
+	float:left;
+	margin-right:1px;
+	font-size:14px;
+	
+}
+	
+
+.splitter ul li a {
+	color: #fff;
+	background-color:#333333;
+	font-family: 'Oswald', Arial;
+	font-weight:100;
+}
+
+.splitter ul li.selected-0 a, .splitter ul li.selected-1 a, .splitter ul li.selected-2 a, .splitter ul li.selected-3 a, .splitter ul li.selected-4 a, .splitter ul li.selected-5 a, .splitter ul li.selected-6 a, .splitter ul li.selected-7 a, .splitter ul li.selected-8 a, .splitter ul li.selected-9 a {
+	color: #fff;
+	background-color:#d05056;
+}
+
+.splitter ul li{
+position:relative;
+
+}
+
+
+/* 3.2 =Image Grid 4 col
+---------------------------------------------------------------------- */
+.clearfix:after {
+	background-color: #333333;
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+.image_grid {
+	float:left;
+	overflow:hidden;
+	width:732px;
+	position:relative;
+	margin-top:40px;
+}
+
+.image_grid li{
+	float: left;
+	line-height: 17px;
+	color: #686f74;
+	list-style:none;
+	overflow:hidden;
+	margin-bottom:30px;
+	margin-right:30px;
+	
+}
+
