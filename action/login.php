@@ -34,7 +34,7 @@ $sql = "SELECT * from login_table WHERE `User_name`='$user' and `Password`='$pas
                                   
                                   break;
                                 case '1':
-                                          header('location:../fhome.php');
+                                          header('location:../faculty/fhome.php');
                                   
                                   break;
                                 default:    
