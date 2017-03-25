@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>CMS LOGIN</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<!-- Custom Theme files -->
+<link href="css/font-awesome.css" rel="stylesheet"> 
+<link href="css/wickedpicker.css" rel="stylesheet" type='text/css' media="all" />
+<link href="css/style11.css" rel='stylesheet' type='text/css' />
+<!--fonts--> 
+<link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+
+
+<!--//fonts--> 
+</head>
+<body>
+<!--background-->
+<a href="index.html"><h1><b>CMS Login</b></h1></a>
+
+    <div class="bg-agile">
+	<div class="book-reservation">
+			<form action="action/login.php" method="post">
+					<div class="form-left-agileits-w3layouts">
+							<label><i class="fa fa-users" aria-hidden="true"></i>User Type</label>
+							<select class="form-control" name="type" id="type" required>
+								<option value="">users</option>
+								<option value="0">Student</option>
+								<option value="1">Faculty</option>
+							</select>
+					</div>
+					<div class="form-date-w3-agileits">
+						<label><i class="fa fa-user" aria-hidden="true"></i> User Name :</label>
+						<input type="text" name="user" placeholder="user name" required=""/>
+					</div>
+					<div class="form-date-w3-agileits">
+						<label><i class="fa fa-envelope" aria-hidden="true"></i>Password</label>
+						<input type="password" name="pass" placeholder="password" required="" />
+					</div>
+					<div class="clear"> </div>
+					<div class="make">
+						  <input type="submit" value="Sign In">
+					</div>
+			</form>
+		</div>
+   </div>
+   <!--copyright-->
+			<div class="copy w3ls">
+		       <p>Create an Account :<a href="signup.php">SIGN UP</a> </p>
+	        </div>
+		<!--//copyright-->
+		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+		<script type="text/javascript" src="js/wickedpicker.js"></script>
+			<script type="text/javascript">
+				$('.timepicker').wickedpicker({twentyFour: false});
+			</script>
+
+
+		<!-- Calendar -->
+				<link rel="stylesheet" href="css/jquery-ui.css" />
+				<script src="js/jquery-ui.js"></script>
+				  <script>
+						  $(function() {
+							$( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker();
+						  });
+				  </script>
+			<!-- //Calendar -->
+			
+
+</body>
+</html>
