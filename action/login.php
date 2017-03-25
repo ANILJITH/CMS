@@ -13,7 +13,7 @@ if (!$con) {
 $type = $_POST['type'];
 $user = $_POST['user'];
 $pass = $_POST['pass'];
-echo "$type";
+
 
 $sql = "SELECT * from login_table WHERE `User_name`='$user' and `Password`='$pass' and `usr_lvl`='$type'";
         $result = $con->query($sql);
@@ -28,8 +28,18 @@ $sql = "SELECT * from login_table WHERE `User_name`='$user' and `Password`='$pas
                               $_SESSION['cid'] = $cid;
                               mysqli_close($con);
 
-                              header('location:../home.php');
-
+                              switch ($type) {
+                                case '0':
+                                          header('location:../student/shome.php');
+                                  
+                                  break;
+                                case '1':
+                                          header('location:../fhome.php');
+                                  
+                                  break;
+                                default:    
+                                  break;
+                              }
                             }}
                             else {
                               header('location:../login.html');
