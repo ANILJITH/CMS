@@ -1,4 +1,4 @@
-<?php 
+<?php
 session_start();
 
 if(isset($_SESSION['cid'])){
@@ -13,6 +13,12 @@ if(isset($_SESSION['cid']))
 	{
 		faculty($id);
 	}
+
+  if (isset($_POST['message']))
+  	{
+  		$msg = $_POST['message'];
+  			msgstore($msg,$id);
+  	}
 
 
 function faculty($id)
@@ -30,10 +36,10 @@ function faculty($id)
     		$sql = "SELECT * from faculty WHERE `Fa_id`='$id'";
         		$result = $con->query($sql);
 
-                            if ($result->num_rows > 0) 
+                            if ($result->num_rows > 0)
                             	{
                             		// output data of each row
-                            		while($row = $result->fetch_assoc()) 
+                            		while($row = $result->fetch_assoc())
                             			{
                             				$GLOBALS['fname'] = $row["First_Name"];
                             				$GLOBALS['lname'] = $row["Last_Name"];
@@ -47,6 +53,37 @@ function faculty($id)
                               header('location:../login.html');
                             	}
 	}
+
+
+  function msgstore($msg,$id)
+  	{
+  		$host = 'localhost';
+  		$user = 'root';
+  		$pass = '';
+  		$db = 'cms';
+
+  		$con = mysqli_connect($host, $user, $pass,$db);
+  		if (!$con) {
+      		die('Can not connect mysqli');
+      		exit;}
+      		$sql = " INSERT INTO `feedback`(`C_id` ,`Usr_Flag`,`Feedback`,`fdbk_Staus`) VALUES ('$id','1','$msg','0')";
+
+      		 if (!mysqli_query($con,$sql)) {
+                     die('Error: ' . mysqli_error($con));
+                         }
+
+
+                else
+                	{
+                		mysqli_close($con);
+                    }
+
+
+  	}
+
+
+
+
 
 ?>
 
@@ -146,8 +183,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="header-top">
 		<div class="container">
 			<ul>
-				<li><a href="../index.html"><span class="glyphicon glyphicon-file""></span>HOME</a></li>
-				<li><a href="../action/prebook.php"><span class="glyphicon glyphicon-envelope"></span>PREBOOKING</a></li>
+				<li><a href="fhome.php"><span class="glyphicon glyphicon-file"></span>HOME</a></li>
+				<li><a href="prebook.php"><span class="glyphicon glyphicon-envelope"></span>PREBOOKING</a></li>
 				<li><a href="payoff.php"><span class="glyphicon glyphicon-file"></span>PAY OFF</a></li>
 				<li><a href="action/logout.php">SIGN OUT</a></li>
 				</ul>
@@ -205,7 +242,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<h3 class="tittle ">CREDITS </h3>
 
 		<div class="col-md-12 capabil-grid text-center">
-			<div class='numscroller numscroller-big-bottom' data-slno='1' data-min='0' data-max='500' data-delay='.5' data-increment="1">2500</div>
+			<div class='numscroller numscroller-big-bottom' data-slno='1' data-min='0' data-max='<?php echo "$points"; ?>' data-delay='.5' data-increment="1"><?php echo "$points"; ?></div>
 			<p><h1>CREDITS ACHIEVED</h1></p>
 		</div>
 		<div class="clearfix"></div>
@@ -220,10 +257,39 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 						<div class="contact-form">
-							<form>
+              <form method="POST">
+                <textarea  type="text" name="message" required></textarea>
+                <input type="submit" value="SEND" >
+              </form>
+
+              </div>
+              </div>
+
+              <div id="respond" class="contact">
+              	<div class="container">
+              		<h3 class="tittle">RESPONSE</h3>
+              		<div class="col-md-12 contact-left ">
+              			<div class="horizontal-tab">
+
+
+              						<div class="contact-form">
+                            <form method="POST">
+                              <textarea  type="text" name="message" required></textarea>
+                              <!-- <input type="submit" value="SEND" > -->
+                            </form>
+                            </div>
+                          </div>
+                          </div>
+
+
+
+
+
+
+					<!-- <form>
 								<textarea type="text" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required="">Message...</textarea>
 								<input type="submit" value="SEND" >
-							</form>
+							</form> -->
 						</div>
 					</div>
 		</div>

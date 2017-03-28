@@ -101,7 +101,7 @@ h3.tittle.reserve {
     /*float: left;*/
 }
 .form-left-agileits-w3layouts {
-    width: 50%;
+    width: 57%;
     /*float: left;*/
 }
 .book-reservation label i{   
@@ -211,7 +211,7 @@ h3.tittle.reserve {
 }
 @media(max-width:1440px){
 	.bg-agile {
-		width: 60%;
+		width: 35%;
 	}
 	h1 {
 		font-size: 33px;
@@ -320,7 +320,7 @@ h3.tittle.reserve {
 		margin: 1em 3em;
 	}
 	.book-reservation {
-		padding: 28px 28px 28px;
+		padding: 15px 180px 18px;
 	}
 }
 @media(max-width:736px){

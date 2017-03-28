@@ -17,46 +17,30 @@ function is_valid_passwords($pass,$confirmpass)
      return true;
 }
 
-// function is_valid_id($id)
-//   {
-//     if (empty($id)) {
-//          echo '<script language="javascript">';
-//           echo 'alert("Admission Number is required")';
-//           echo '</script>';
-//          return false;
-//      }
-//      else
-//      {
-//       $host = 'localhost';
-//       $user = 'root';
-//       $pass = '';
-//       $db = 'cms';
-//       $con1 = mysqli_connect($host, $user, $pass,$db);
-//       if (!$con1) {
-//       die('Can not connect mysqli');
-//       exit;}
+function validatefaculty($f_name,$l_name,$fa_id,$user_email,$phone_no,$dept,$password,$uname,$usrlvl)
+  {
+    $host = 'localhost';
+    $user = 'root';
+    $pass = '';
+    $db = 'cms';
 
-//          $sql1 = "SELECT * from `students` WHERE `Stud_id` ='$id' " ;
-//          $result = $con1->query($sql1);
-//          if ($result->num_rows > 0)
-//             {
-//               echo '<script language="javascript">';
-//               echo 'alert("Enter a valid Student id")';
-//               echo '</script>';
-//             }
- 
-//             if (!mysqli_query($con1,$sql1)) {
-//                    die('Error: ' . mysqli_error($con1));
-//                    echo "Error";
-//                        }
+    $con = mysqli_connect($host, $user, $pass,$db);
+    if (!$con) {
+        die('Can not connect mysqli');
+        exit;}
+        $sql = "SELECT * from faculty_list WHERE `Fa_id` = '$fa_id' ";
+            $result = $con->query($sql);
 
-
-//      }
-
-
-
-
-//   }
+                            if ($result->num_rows > 0) 
+                              {
+                      create_fac($f_name,$l_name,$fa_id,$user_email,$phone_no,$dept,$password,$uname,$usrlvl);
+                              } 
+                              else{
+                                  echo '<script language="javascript">';
+                                  echo 'alert("Enter a valid Faculty id")';
+                                  echo '</script>';
+                              }
+  }
 
 
 function create_stud($f_name,$l_name,$s_id,$user_email,$phone_no,$user_batch,$password,$uname,$usrlvl) 
@@ -136,15 +120,12 @@ if (isset($_POST['password1']) && isset($_POST['password2'])){
 
     if (is_valid_passwords($password,$cpassword))
     {
-      // echo "same pass";
-      // if (is_valid_id($s_id)) {
-        # code...
-      echo "$usrlvl";
+     
 
       switch ($usrlvl) {
         case '0':
           # code...
-              echo "string11";
+              
                $s_id =$_POST['s_id'];
                $user_batch =$_POST['user_batch'];
                create_stud($f_name,$l_name,$s_id,$user_email,$phone_no,$user_batch,$password,$uname,$usrlvl);
@@ -152,12 +133,10 @@ if (isset($_POST['password1']) && isset($_POST['password2'])){
 
         case '1':
           # code...
-               echo "string2";
+               
                $dept = $_POST['dept'];
                $fa_id=$_POST['fa_id'];
-               create_fac($f_name,$l_name,$fa_id,$user_email,$phone_no,$dept,$password,$uname,$usrlvl);
-          break;
-        
+              validatefaculty($f_name,$l_name,$fa_id,$user_email,$phone_no,$dept,$password,$uname,$usrlvl);
         default:
           # code...
                echo 'Error Registering User!';

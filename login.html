@@ -1,74 +1,32 @@
-<!DOCTYPE HTML>
+<!doctype html>
 <html>
 <head>
-<title>CMS LOGIN</title>
+<title>CMS Login</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<!-- Custom Theme files -->
-<link href="css/font-awesome.css" rel="stylesheet"> 
-<link href="css/wickedpicker.css" rel="stylesheet" type='text/css' media="all" />
-<link href="css/style11.css" rel='stylesheet' type='text/css' />
-<!--fonts--> 
-<link href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-<link href="//fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
-
-
-<!--//fonts--> 
+<!-- fonts -->
+<link href="//fonts.googleapis.com/css?family=Nunito:300,400,700" rel="stylesheet">
+<link href="//fonts.googleapis.com/css?family=Muli:300,400" rel="stylesheet">
+<!-- /fonts -->
+<!-- css -->
+<link href="css/style22.css" rel='stylesheet' type='text/css' media="all" />
+<!-- /css -->
 </head>
 <body>
-<!--background-->
-<a href="index.html"><h1><b>CMS Login</b></h1></a>
-
-    <div class="bg-agile">
-	<div class="book-reservation">
-			<form action="action/login.php" method="post">
-					<div class="form-left-agileits-w3layouts">
-							<label><i class="fa fa-users" aria-hidden="true"></i>User Type</label>
-							<select class="form-control" name="type" id="type" required>
+<h1 class="agileits w3 wthree w3-agile w3-agileits agileinfo agile"><a href="index.php">CMS Login</a></h1>
+<div class="content-w3ls agileits w3 wthree w3-agile w3-agileits agileinfo agile">
+	<form action="action/login.php" method="post" class="form-agileits">
+		<input type="text" id="username" name="user" placeholder="USERNAME" title="Please enter your First Name" required="">
+		<input type="password" id="email" name="pass" placeholder="PASSWORD" title="Please enter a Valid Email Address" required="">
+		<select name="type" id="type" required>
 								<option value="">users</option>
 								<option value="0">Student</option>
 								<option value="1">Faculty</option>
 							</select>
-					</div>
-					<div class="form-date-w3-agileits">
-						<label><i class="fa fa-user" aria-hidden="true"></i> User Name :</label>
-						<input type="text" name="user" placeholder="user name" required=""/>
-					</div>
-					<div class="form-date-w3-agileits">
-						<label><i class="fa fa-envelope" aria-hidden="true"></i>Password</label>
-						<input type="password" name="pass" placeholder="password" required="" />
-					</div>
-					<div class="clear"> </div>
-					<div class="make">
-						  <input type="submit" value="Sign In">
-					</div>
-			</form>
-		</div>
-   </div>
-   <!--copyright-->
-			<div class="copy w3ls">
-		       <p>Create an Account :<a href="signup.php">SIGN UP</a> </p>
-	        </div>
-		<!--//copyright-->
-		<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-		<script type="text/javascript" src="js/wickedpicker.js"></script>
-			<script type="text/javascript">
-				$('.timepicker').wickedpicker({twentyFour: false});
-			</script>
-
-
-		<!-- Calendar -->
-				<link rel="stylesheet" href="css/jquery-ui.css" />
-				<script src="js/jquery-ui.js"></script>
-				  <script>
-						  $(function() {
-							$( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker();
-						  });
-				  </script>
-			<!-- //Calendar -->
-			
-
+		<input type="submit" class="sign-in" value="Submit">
+	</form>
+</div>
+<p class="copyright agileits w3 wthree w3-agile w3-agileits agileinfo agile" style="font-size:30px;">Create an Account : <a href="signup.php" target="_blank">signup</a></p>
 </body>
 </html>
