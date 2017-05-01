@@ -1,3 +1,56 @@
+<?php
+session_start();
+
+if(isset($_SESSION['cid'])){
+   $id=$_SESSION['cid'];
+}else{
+    //echo 'no session found';exit;
+    header('location:../login.html');
+    exit();
+}
+
+$id = $_SESSION['cid'];
+$b = $_SESSION['bill1'];
+
+
+if(isset($_POST['pay']))
+ {  
+ 	$amnt = $_POST['name'];
+ 	if ($amnt>$b) {
+ 		 echo '<script language="javascript">';
+       echo 'alert("Can not pay more than your total amount to be payed")';
+       echo '</script>';
+ 	}
+ 	else{
+ 		$amount = $b-$amnt;
+ 		remamount($id,$amount);
+ 	}
+    
+ }
+
+function remamount($id,$amount)
+	{
+
+         $host = 'localhost';
+         $user = 'root';
+         $pass = '';
+         $db = 'cms';
+         $con = mysqli_connect($host, $user, $pass,$db);
+         if (!$con) {
+             die('Can not connect mysqli');
+             exit;}
+
+                  $sql1="UPDATE faculty SET `Bill`='$amount' WHERE `Fa_id` = '$id'";  
+                  if (!mysqli_query($con,$sql1)) {
+                                  die('Error: ' . mysqli_error($con));
+         if (!mysqli_query($con,$sql)) {
+          die('Error: ' . mysqli_error($con));
+                       }
+	}
+	header('location:/canteen/faculty/fhome.php');
+}
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -26,7 +79,7 @@
 			</div>
 			<div class="w3pay-right wthree-pay-grid">
 				<div class="card-bounding agileits">
-					<form action="fhome.php" method="post">
+					<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
 						<div class="card-details">
 							<aside>Total Amount to be Paid:</aside>
 							<input type="text" name="name" placeholder="Rupees" required=""/>
@@ -50,7 +103,7 @@
 							</div>
 							<div class="clear">	</div>
 						</div>
-						<input type="submit" value="Pay Now">
+						<input type="submit" name="pay" value="Pay Now">
 					</form>
 				</div>
 			</div>

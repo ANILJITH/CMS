@@ -180,7 +180,7 @@ if (isset($_POST['password1']) && isset($_POST['password2'])){
 </head>
 <body>
 <!--background-->
-<a href="index.html"><h1> CANTEEN MANAGEMENT SYSTEM </h1></a>
+<a href="index.php"><h1> CANTEEN MANAGEMENT SYSTEM </h1></a>
 
     <div class="bg-agile">
   <div class="book-reservation">

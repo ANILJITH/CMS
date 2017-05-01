@@ -20,25 +20,71 @@ if(isset($_POST['cancel']))
     addcredit($id,$ddate,$lvlusr);
  }
 
-// function deleterow($id,$ddate)
-//     {
-//         // $host = 'localhost';
-//         // $user = 'root';
-//         // $pass = '';
-//         // $db = 'cms';
-//         // $con = mysqli_connect($host, $user, $pass,$db);
-//         // if (!$con) {
-//         //     die('Can not connect mysqli');
-//         //     exit;}
-//         //     $sql = "DELETE FROM purchase WHERE `C_id`='$id' and `Date`='$ddate'"; 
-//         //     if ($con->query($sql) === TRUE) {
-//         //         header('location:billing.php');
-//         //         } else {
-//         //             $con->error;
-//         //         }
+ if(isset($_POST['payadd']))
+ {   
+    addcredit($id,$ddate,$lvlusr); 
+    addpay($id,$ddate,$lvlusr);
+    header('location:/canteen/superuser/billing.php');
+ }
 
-//         //     $con->close();
-//     }
+function addpay($id,$ddate,$lvlusr)
+    {
+         $host = 'localhost';
+         $user = 'root';
+         $pass = '';
+         $db = 'cms';
+         $con = mysqli_connect($host, $user, $pass,$db);
+         if (!$con) {
+             die('Can not connect mysqli');
+             exit;}
+
+
+             $sqla = "SELECT * from purchase WHERE `C_id`='$id' and `Date`='$ddate'"; 
+                     $total1 = 0;
+                         $resulta = $con->query($sqla);
+
+                            if ($resulta->num_rows > 0) 
+                                {  
+
+                                    while($rowa = $resulta->fetch_assoc()) 
+                                        {   $amount=$rowa['Amount'];
+                                             $total1 = $total1 + $amount;
+                                        }
+                                }
+
+                                 $sqls = "SELECT * from faculty WHERE `Fa_id`='$id'"; 
+
+                                $results = $con->query($sqls);
+
+                            if ($results->num_rows > 0) 
+                                {   
+                                    while($rows = $results->fetch_assoc())
+                                    {
+                                       $amntt = $rows['Bill']; 
+                                    }
+                                }
+
+
+                                
+
+             $sql = "SELECT * from login_table WHERE `C_id`='$id'"; 
+
+             $result = $con->query($sql);
+
+                            if ($result->num_rows > 0) 
+                                {   
+
+                                    $addamnt = $total1+$amntt;
+                                    $sql1="UPDATE faculty SET `Bill`='$addamnt' WHERE `Fa_id` = '$id'";  
+                                    if (!mysqli_query($con,$sql1)) {
+                                                    die('Error: ' . mysqli_error($con));
+                                                        }          
+                                }    
+
+                            if (!mysqli_query($con,$sql)) {
+                   die('Error: ' . mysqli_error($con));
+                       }
+    }
 
  function addcredit($id,$ddate,$lvlusr)
     {
@@ -266,12 +312,11 @@ function genbill($ddate,$id)
                   }
 
     }
+
     $GLOBALS['sum']=$total;
     $GLOBALS['sum1']=$total;
 
 }
-
-
  ?>
 
 
@@ -462,13 +507,14 @@ function genbill($ddate,$id)
                    
                 </td>
                 <td><b><?php echo "$sum"; ?></b></td>
+
             </tr>
         </table>
     </div>
     <div>
     <div class="span2">
         <form action="#" method="post">
-            <center><button name="cancel"">Print</button></center>
+            <center><button name="cancel"">Print</button><button name="payadd"">Add-Amount</button></center>
         </form>
          
     </div>

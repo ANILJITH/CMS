@@ -1,3 +1,105 @@
+<?php
+session_start();
+
+if(isset($_SESSION['cid'])){
+   $id=$_SESSION['cid'];
+}else{
+    //echo 'no session found';exit;
+    header('location:../login.html');
+    exit();
+}
+
+
+
+
+
+
+maxdate();
+function maxdate()
+    {
+        $host = 'localhost';
+        $user = 'root';
+        $pass = '';
+        $db = 'cms';
+
+        $con = mysqli_connect($host, $user, $pass,$db);
+        if (!$con) {
+            die('Can not connect mysqli');
+            exit;}
+
+            $sql = "SELECT Food_id,max(Date) as max_date from Daily_Food";
+                $result = $con->query($sql);
+
+                            if ($result->num_rows > 0)
+                                {
+                                    // output data of each row
+                                    while($row = $result->fetch_assoc())
+                                        {
+                                          $fid= $row["Food_id"];
+                                    $maxdate=$row["max_date"];
+                                        }
+                                }
+                                foodid($maxdate);
+
+
+    }
+  function foodid($maxdate)
+    {
+      global $array;
+      $array=array();
+        $host = 'localhost';
+        $user = 'root';
+        $pass = '';
+        $db = 'cms';
+
+
+        $con = mysqli_connect($host, $user, $pass,$db);
+        if (!$con) {
+            die('Can not connect mysqli');
+            exit;}
+
+
+
+            $sql2 = "SELECT `Food_id`  from Daily_Food WHERE `Date`='$maxdate'";
+                $result2 = $con->query($sql2);
+
+                              if ($result2->num_rows > 0)
+                                {
+                                    // output data of each row
+                                    while($row2 = $result2->fetch_assoc())
+                                        {
+                                          $fid2= $row2["Food_id"];
+                                        $sql1="SELECT `Food_Name` FROM food_menu WHERE `Food_id`='$fid2'";
+                                            $result1 = $con->query($sql1);
+
+                                                              if ($result1->num_rows > 0)
+                                                                {
+                                                                    // output data of each row
+                                                                    while($row1 = $result1->fetch_assoc())
+                                                                        {
+                                                                            $foodname = $row1["Food_Name"];
+
+                                                                    $array[]=$foodname ;
+
+
+
+
+                                                                        }
+
+
+
+                                                                }
+
+                                        }
+                                    // echo $array[0];
+                                }
+
+
+
+    }
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
     
@@ -54,7 +156,7 @@
                 </div>
             </div>
         </div>
-
+<form method="post" action="items.php">
         <div class="section primary-section" id="about">
             <div class="triangle"></div>
             <div class="container">
@@ -64,8 +166,8 @@
                 <div class="row-fluid team">
                     <div class="span4" id="first-person">
                         <div class="thumbnail">
-                            <img src="images/Team1.jpg" alt="team 1">
-                            <h3>Ghee Roast</h3>
+                            <img src="images/<?php echo $array[0] ?>.jpg" alt="team 1">
+                            <h3><?php echo $array[0] ?></h3>
                             <ul class="social">
 
                             </ul>
@@ -75,8 +177,8 @@
 
                     <div class="span4" id="second-person">
                         <div class="thumbnail">
-                            <img src="images/Team2.jpg" alt="team 1">
-                            <h3>Chicken Biriyani</h3>
+                            <img src="images/<?php echo $array[1] ?>.jpg" alt="team 1">
+                            <h3><?php echo $array[1] ?></h3>
                             <ul class="social">
                                 
                             </ul>
@@ -84,8 +186,8 @@
                     </div>
                     <div class="span4" id="third-person">
                         <div class="thumbnail">
-                            <img src="images/Team3.jpg" alt="team 1">
-                            <h3>Oothappam</h3>
+                            <img src="images/<?php echo $array[2] ?>.jpg" alt="team 1">
+                            <h3><?php echo $array[2] ?></h3>
                             <ul class="social">
                                
                             </ul>
@@ -93,17 +195,17 @@
                     </div>
              
                             <div class="toggle-button toggle-button--aava">
-                                <input id="toggleButton" name="btn1" type="checkbox">
+                                <input id="toggleButton" name="btn1" value="<?php echo $array[0] ?>" type="checkbox">
                                 <label for="toggleButton" data-on-text="Yes" data-off-text="No"></label>
                                  <div class="toggle-button__icon"></div>
                                 </div>
                             <div class="toggle-button toggle-button--aava">
-                                <input id="toggleButton1" name="btn2" type="checkbox">
+                                <input id="toggleButton1" name="btn2" value="<?php echo $array[1] ?>" name="btn2" type="checkbox">
                                 <label for="toggleButton1" data-on-text="Yes" data-off-text="No"></label>
                                  <div class="toggle-button__icon"></div>
                                 </div>    
                                 <div class="toggle-button toggle-button--aava">
-                                <input id="toggleButton2" name="btn3" type="checkbox">
+                                <input id="toggleButton2" name="btn3" value="<?php echo $array[2] ?>" name="btn3" type="checkbox">
                                 <label for="toggleButton2" data-on-text="Yes" data-off-text="No"></label>
                                  <div class="toggle-button__icon"></div>
                                 </div>                   
@@ -111,8 +213,8 @@
                 <div class="row-fluid team">
                     <div class="span4" id="first-person">
                         <div class="thumbnail">
-                            <img src="images/Team4.jpg" alt="team 1">
-                            <h3>Ice Cream</h3>
+                            <img src="images/<?php echo $array[3] ?>.jpg" alt="team 1">
+                            <h3><?php echo $array[3] ?></h3>
                             <ul class="social">
                                 
                             </ul>
@@ -120,8 +222,8 @@
                     </div>
                     <div class="span4" id="second-person">
                         <div class="thumbnail">
-                            <img src="images/Team5.jpg" alt="team 1">
-                            <h3>Chilly Chicken</h3>
+                            <img src="images/<?php echo $array[4] ?>.jpg" alt="team 1">
+                            <h3><?php echo $array[4] ?></h3>
                             <ul class="social">
                                
                             </ul>
@@ -129,31 +231,26 @@
                     </div>
                     <div class="span4" id="third-person">
                         <div class="thumbnail">
-                            <img src="images/Team6.jpg" alt="team 1">
-                            <h3>Masala Dosa</h3>
+                            <img src="images/<?php echo $array[5] ?>.jpg" alt="team 1">
+                            <h3><?php echo $array[5] ?></h3>
                             <ul class="social">
                                
                             </ul>
-                            <!-- <div class="mask">
-                                <h2>Designer</h2>
-                                <p>When you stop expecting people to be perfect, you can like them for who they are.</p>
-                            </div>   -->
                            
                         </div>
                     </div>
- <!-- TRying                    -->
                     <div class="toggle-button toggle-button--aava">
-                                <input id="toggleButton3" type="checkbox">
+                                <input id="toggleButton3" name="btn4" value="<?php echo $array[3] ?>" type="checkbox">
                                 <label for="toggleButton3" data-on-text="Yes" data-off-text="No"></label>
                                  <div class="toggle-button__icon"></div>
                                 </div>
                             <div class="toggle-button toggle-button--aava">
-                                <input id="toggleButton4" type="checkbox">
+                                <input id="toggleButton4" name="btn5" value="<?php echo $array[4] ?>" type="checkbox">
                                 <label for="toggleButton4" data-on-text="Yes" data-off-text="No"></label>
                                  <div class="toggle-button__icon"></div>
                                 </div>    
                                 <div class="toggle-button toggle-button--aava">
-                                <input id="toggleButton5" type="checkbox">
+                                <input id="toggleButton5" name="btn6" value="<?php echo $array[5] ?>" type="checkbox">
                                 <label for="toggleButton5" data-on-text="Yes" data-off-text="No"></label>
                                  <div class="toggle-button__icon"></div>
                                 </div> 
@@ -162,8 +259,9 @@
                 <div class="span4"></div>
                 <div class="span4">
 
-                    <button type="button" class="btn btn-primary btn-lg">Pay Now</button> 
+                    <button class="btn btn-primary btn-lg">Pay Now</button> 
                 </div>
+</form>
         <!-- Footer section start -->
         <div class="scrollup">
             <a href="#">

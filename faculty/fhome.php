@@ -9,17 +9,38 @@ if(isset($_SESSION['cid'])){
     exit();
 }
 
+
+
 if(isset($_SESSION['cid']))
 	{
 		faculty($id);
 	}
 
-  if (isset($_POST['message']))
-  	{
-  		$msg = $_POST['message'];
-  			msgstore($msg,$id);
-  	}
+if (isset($_POST['message']))
+	{
+		$msg = $_POST['message'];
+			msgstore($msg,$id);
+	}
 
+	$host = 'localhost';
+	$user = 'root';
+	$pass = '';
+	$db = 'cms';
+
+	$con = mysqli_connect($host, $user, $pass,$db);
+	if (!$con) {
+    	die('Can not connect mysqli');
+    	exit;}
+    	$sql = "SELECT * from feedback WHERE `C_id`='$id'";
+        	$result = $con->query($sql);
+                           if ($result->num_rows > 0)
+                            {
+                            	// output data of each row
+                            	while($row = $result->fetch_assoc())
+                            		{
+                            			$array=$row['Responses'];
+                            	 	}
+                            }
 
 function faculty($id)
 	{
@@ -47,13 +68,14 @@ function faculty($id)
                             				$GLOBALS['phone'] = $row["Phone_No"];
                             				$GLOBALS['email'] = $row["Email"];
                             				$GLOBALS['points'] = $row["Points"];
+                            				$GLOBALS['bill'] = $row["Bill"]; 
+                            				$_SESSION['bill1'] =$row["Bill"]; 
                             	 		}
                             	}
                             else{
                               header('location:../login.html');
                             	}
 	}
-
 
   function msgstore($msg,$id)
   	{
@@ -80,11 +102,6 @@ function faculty($id)
 
 
   	}
-
-
-
-
-
 ?>
 
 <!DOCTYPE html>
@@ -175,23 +192,31 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 </head>
 <body>
-
-
-
-
-
-	<div class="header-top">
+<div class="header-top">
 		<div class="container">
 			<ul>
 				<li><a href="fhome.php"><span class="glyphicon glyphicon-file"></span>HOME</a></li>
 				<li><a href="prebook.php"><span class="glyphicon glyphicon-envelope"></span>PREBOOKING</a></li>
 				<li><a href="payoff.php"><span class="glyphicon glyphicon-file"></span>PAY OFF</a></li>
-				<li><a href="action/logout.php">SIGN OUT</a></li>
-				</ul>
+				<li class="dropdown at-drop">
+		              <a href="#" class="dropdown-toggle dropdown-at " data-toggle="dropdown"><i class="fa fa-globe"></i> <span class="number">RESPONSES</span></a>
+		              <ul class="dropdown-menu menu1 " role="menu">
+		                <li><a href="#">
+		                	<div class="user-new">
+		                	<p style="font-size: 20px;"><?php echo "$array"; ?></p>
+		                	</div>
+		                	<div class="user-new-left">
+
+		                	<i class="fa fa-rss"></i>
+		                	</div>
+		                	<div class="clearfix"> </div>
+		                </a></li>
+		              </ul>
+		            </li>
+		            <li><a href="action/logout.php">SIGN OUT</a></li>
+			</ul>
 		</div>
 	</div>
-
-
 
 	<!--banner-->
 	<div id="home" class="banner">
@@ -202,7 +227,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 				<div class="col-md-8 header-right">
 
-					<h2>Hello <?php echo "$fname $lname"; ?>,</h2>
+					<h2>Hello <?php echo "$fname $lname,"; ?></h2>
 					<h6>Beloved member of CMS</h6>
 					<ul class="address">
 						<li>
@@ -229,6 +254,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<li><a href="<?php echo "$email"; ?>"><?php echo "$email"; ?></a></li>
 							</ul>
 						</li>
+						<li>
+							<ul class="address-text">
+								<li><b>Amount To be Payed</b></li>
+								<li><?php echo "$bill"; ?></li>
+							</ul>
+						</li>
 
 					</ul>
 				</div>
@@ -243,7 +274,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 		<div class="col-md-12 capabil-grid text-center">
 			<div class='numscroller numscroller-big-bottom' data-slno='1' data-min='0' data-max='<?php echo "$points"; ?>' data-delay='.5' data-increment="1"><?php echo "$points"; ?></div>
-			<p><h1>CREDITS ACHIEVED</h1></p>
+			<p><h1>CREDITS ACHIEVED</h1> When you cross each 100 points on your credit redeem your gift from CANTEEN</p>
 		</div>
 		<div class="clearfix"></div>
 	</div>
@@ -254,55 +285,34 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<h3 class="tittle">FEEDBACK</h3>
 		<div class="col-md-12 contact-left ">
 			<div class="horizontal-tab">
-
-
 						<div class="contact-form">
-              <form method="POST">
-                <textarea  type="text" name="message" required></textarea>
-                <input type="submit" value="SEND" >
-              </form>
 
-              </div>
-              </div>
-
-              <div id="respond" class="contact">
-              	<div class="container">
-              		<h3 class="tittle">RESPONSE</h3>
-              		<div class="col-md-12 contact-left ">
-              			<div class="horizontal-tab">
-
-
-              						<div class="contact-form">
-                            <form method="POST">
-                              <textarea  type="text" name="message" required></textarea>
-                              <!-- <input type="submit" value="SEND" > -->
-                            </form>
-                            </div>
-                          </div>
-                          </div>
-
-
-
-
-
-
-					<!-- <form>
-								<textarea type="text" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Message...';}" required="">Message...</textarea>
+							<form method="POST">
+								<textarea  type="text" name="message" required></textarea>
 								<input type="submit" value="SEND" >
-							</form> -->
-						</div>
-					</div>
+							</form>
+            </div>
+            </div>
+              <div id="respond" class="contact">
+                <div class="container">
+                 
+                          </div>
+                          </div>
+
+
+
+
+
+
+
+
 		</div>
 		<div class="clearfix"></div>
 
-
-
 	</div>
+
 </div>
-
-
-
-
+<script src="js/bootstrap.js"></script>
 
 	<!--scrolling js-->
 	<script src="js/jquery.nicescroll.js"></script>
@@ -311,14 +321,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- smooth scrolling -->
 	<script type="text/javascript">
 		$(document).ready(function() {
-		/*
-			var defaults = {
-			containerID: 'toTop', // fading element id
-			containerHoverID: 'toTopHover', // fading element hover id
-			scrollSpeed: 1200,
-			easingType: 'linear'
-			};
-		*/
+
 		$().UItoTop({ easingType: 'easeOutQuart' });
 		});
 	</script>

@@ -9,8 +9,8 @@ if(isset($_SESSION['id'])){
     exit();
 }
 
-if (isset($_POST['usrtype']) && isset($_POST['rid'])&& isset($_POST['res'])) 
-  {
+if (isset($_POST['rid'])&& isset($_POST['res'])) 
+  {echo "string";
     $rid = $_POST['rid'];
     $res = $_POST['res'];
     addresponse($rid,$res);
@@ -18,7 +18,7 @@ if (isset($_POST['usrtype']) && isset($_POST['rid'])&& isset($_POST['res']))
   }
 
 function addresponse($rid,$res)
-  {
+  { echo "string";
 
     $host = 'localhost';
     $user = 'root';
@@ -159,7 +159,7 @@ function responses()
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-               <h1> <a class="navbar-brand" href="index.html">CMS</a></h1>
+               <h1> <a class="navbar-brand" href="index.php">CMS</a></h1>
 			   </div>
 			 <div class=" border-bottom">
         	<div class="full-left">
@@ -265,7 +265,7 @@ function responses()
  	<!--banner-->
 		    <div class="banner">
 		    	<h2>
-				<a href="index.html">Home</a>
+				<a href="index.php">Home</a>
 				<i class="fa fa-angle-right"></i>
 				<span>Layout</span>
 				</h2>

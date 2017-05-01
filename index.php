@@ -66,40 +66,12 @@ function maxdate()
                                                             				$foodname = $row1["Food_Name"];
 
                                                                     $array[]=$foodname ;
-
-
-
-
                                                             	 		}
-
-
-
                                                             	}
-
                               	 		}
-                                    // echo $array[0];
                               	}
-
-
-
   	}
-
-
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -288,7 +260,7 @@ function maxdate()
                                   <!-- <div class="mask"></div> -->
                               </div>
                           </li>
-                          <li class="span4 mix photo " style="margin-top: -345px;">
+                          <li class="span4 mix photo ">
                               <div class="thumbnail">
                                     <img src="images/<?php echo $array[4] ?>.jpg">
                                   <a href="#single-project" class="show_hide more" rel="#slidingDiv4">
@@ -299,7 +271,7 @@ function maxdate()
                                   <!-- <div class="mask"></div> -->
                               </div>
                           </li>
-                          <li class="span4 mix identity" style="margin-top: -345px;">
+                          <li class="span4 mix identity">
                               <div class="thumbnail">
                                   <img src="images/<?php echo $array[5] ?>.jpg">
                                   <a href="#single-project" class="show_hide more" rel="#slidingDiv5">
@@ -310,105 +282,11 @@ function maxdate()
                                   <!-- <div class="mask"></div> -->
                               </div>
                           </li>
-                            </ul>    <!--
-                          <li class="span4 mix web">
-                              <div class="thumbnail">
-                                  <img src="images/Portfolio07.png" alt="project 7" />
-                                  <a href="#single-project" class="show_hide more" rel="#slidingDiv6">
-                                      <i class="icon-plus"></i>
-                                  </a>
-                                  <h3>Thumbnail label</h3>
-                                  <p>Thumbnail caption...</p>
-                                  <div class="mask"></div>
-                              </div>
-                          </li>
-                          <li class="span4 mix photo">
-                              <div class="thumbnail">
-                                  <img src="images/Portfolio08.png" alt="project 8">
-                                  <a href="#single-project" class="show_hide more" rel="#slidingDiv7">
-                                      <i class="icon-plus"></i>
-                                  </a>
-                                  <h3>Thumbnail label</h3>
-                                  <p>Thumbnail caption...</p>
-                                  <div class="mask"></div>
-                              </div>
-                          </li>
-                          <li class="span4 mix identity">
-                              <div class="thumbnail">
-                                  <img src="images/Portfolio09.png" alt="project 9">
-                                  <a href="#single-project" class="show_hide more" rel="#slidingDiv8">
-                                      <i class="icon-plus"></i>
-                                  </a>
-                                  <h3>Thumbnail label</h3>
-                                  <p>Thumbnail caption...</p>
-                                  <div class="mask"></div>
-                              </div>
-                          </li> -->
-
+                            </ul>    
                   </div>
               </div>
           </div>
-          <!-- Portfolio section end -->
-          <!-- About us section start -->
-
-          <!-- About us section end -->
-
-          <!-- Client section start -->
-          <!-- Client section start -->
-         <!--  <div id="clients">
-              <div class="section primary-section">
-                  <div class="triangle"></div>
-                  <div class="container">
-                      <div class="title">
-                          <h1>What Client Say?</h1>
-                          <p>I get way too much happiness from good food.</p>
-                      </div>
-                      <div class="row">
-                          <div class="span4">
-                              <div class="testimonial">
-                                  <p>"I've worked too hard and too long to let anything stand in the way of my goals. I will not let my teammates down and I will not let myself down."</p>
-                                  <div class="whopic">
-                                      <div class="arrow"></div>
-                                      <img src="images/Client1.png" class="centered" alt="client 1">
-                                      <strong>John Doe
-                                          <small>Client</small>
-                                      </strong>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="span4">
-                              <div class="testimonial">
-                                  <p>"In motivating people, you've got to engage their minds and their hearts. I motivate people, I hope, by example - and perhaps by excitement, by having productive ideas to make others feel involved."</p>
-                                  <div class="whopic">
-                                      <div class="arrow"></div>
-                                      <img src="images/Client2.png" class="centered" alt="client 2">
-                                      <strong>John Doe
-                                          <small>Client</small>
-                                      </strong>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="span4">
-                              <div class="testimonial">
-                                  <p>"Determine never to be idle. No person will have occasion to complain of the want of time who never loses any. It is wonderful how much may be done if we are always doing."</p>
-                                  <div class="whopic">
-                                      <div class="arrow"></div>
-                                      <img src="images/Client3.png" class="centered" alt="client 3">
-                                      <strong>John Doe
-                                          <small>Client</small>
-                                      </strong>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <p class="testimonial-text">
-                          "Perfection is Achieved Not When There Is Nothing More to Add, But When There Is Nothing Left to Take Away"
-                      </p>
-                  </div>
-              </div>
-          </div> -->
-          <!-- Price section end -->
-          <!-- Contact section start -->
+         
           <div id="contact" class="contact">
               <div class="section secondary-section">
                   <div class="container">
@@ -416,42 +294,6 @@ function maxdate()
                           <h1>Contact Us</h1>
                       </div>
                   </div>
-                  <div class="map-wrapper">
-                      <div class="container">
-                          <!-- <div class="row-fluid">
-                              <div class="span5 contact-form centered">
-                                  <h3>Say Hello</h3>
-                                  <div id="successSend" class="alert alert-success invisible">
-                                      <strong>Well done!</strong>Your message has been sent.</div>
-                                  <div id="errorSend" class="alert alert-error invisible">There was an error.</div>
-                                  <form id="contact-form" action="php/mail.php">
-                                      <div class="control-group">
-                                          <div class="controls">
-                                              <input class="span12" type="text" id="name" name="name" placeholder="* Your name..." />
-                                              <div class="error left-align" id="err-name">Please enter name.</div>
-                                          </div>
-                                      </div>
-                                      <div class="control-group">
-                                          <div class="controls">
-                                              <input class="span12" type="email" name="email" id="email" placeholder="* Your email..." />
-                                              <div class="error left-align" id="err-email">Please enter valid email adress.</div>
-                                          </div>
-                                      </div>
-                                      <div class="control-group">
-                                          <div class="controls">
-                                              <textarea class="span12" name="comment" id="comment" placeholder="* Comments..."></textarea>
-                                              <div class="error left-align" id="err-comment">Please enter your comment.</div>
-                                          </div>
-                                      </div>
-                                      <div class="control-group">
-                                          <div class="controls">
-                                              <button id="send-mail" class="message-btn">Send message</button>
-                                          </div>
-                                      </div>
-                                  </form>
-                              </div> -->
-                          </div>
-                      </div>
                   </div>
                   <div class="container">
                       <div class="span9 center contact-info">
@@ -468,7 +310,7 @@ function maxdate()
           <!-- Contact section edn -->
           <!-- Footer section start -->
           <div class="footer">
-              <p>&copy;2017</p>
+              <p>&copy; 2018 Batch. MiniProject | Designed by TechKnightz</p>
           </div>
           <!-- Footer section end -->
           <!-- ScrollUp button start -->

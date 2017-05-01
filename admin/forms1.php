@@ -256,7 +256,10 @@ function genreport($nmonth,$salary,$inventory)
 									<div id="os-Other-lbl"><b>Profit</b><span><?php echo "$pr %"; ?></span></div>
 								 </div>
 								 </div>
-							<div class="grid-2">
+							<div class="grid-2"><head><b><?php echo "PROFIT = $profit /-"; ?> <br>
+							<?php echo "SALARY = $salary /-"; ?><br>
+							<?php echo "INVENTORY = $inventory /-"; ?><br></b></head>
+							
 								<canvas id="pie" height="315" width="470" style="width: 470px; height: 315px;"></canvas>
 								<script>
 									var pieData = [

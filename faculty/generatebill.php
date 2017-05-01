@@ -20,156 +20,43 @@ $val4 = $_POST['btn4'];
 $val5 = $_POST['btn5'];
 $val6 = $_POST['btn6'];
 
-findprice($val1,$val2,$val3,$val4,$val5,$val6);
+if($val1){$val1price=findprice($val1);}
+else{$val1price=0;}
+if($val2){$val2price=findprice($val2);}
+else{$val2price=0;}
+if($val3){$val3price=findprice($val3);}
+else{$val3price=0;}
+if($val4){$val4price=findprice($val4);}
+else{$val4price=0;}
+if($val5){$val5price=findprice($val5);}
+else{$val5price=0;}
+if($val6){$val6price=findprice($val6);}
+else{$val6price=0;}
+
 $sum = $val1price+$val2price+$val3price+$val4price+$val5price+$val6price;
+$_SESSION['sum'] = $sum;
 
 $id =  $_SESSION['cid'];
 customer($id);
 
-if(isset($_POST['cancel']))
- {    
-    addcredit($id,$ddate,$lvlusr,$sum);
- }
 
-
-
-
-function findprice($val1,$val2,$val3,$val4,$val5,$val6)
+function findprice($val)
     {
                     $host = 'localhost';
                      $user = 'root';
                      $pass = '';
                      $db = 'cms';
                      $con = mysqli_connect($host, $user, $pass,$db);
-                     $sql = "SELECT Cost from food_menu WHERE `Food_Name` = '$val1'";
+                     $sql = "SELECT Cost from food_menu WHERE `Food_Name` = '$val'";
                          $result = $con->query($sql);
                             if ($result->num_rows > 0) 
                                 {while($row = $result->fetch_assoc()) 
-                                        {   $GLOBALS['val1price']=$row['Cost'];
+                                        {   return $row['Cost'];
                                         }
-                                }
-                    $sql = "SELECT Cost from food_menu WHERE `Food_Name` = '$val2'";
-                         $result = $con->query($sql);
-                            if ($result->num_rows > 0) 
-                                {while($row = $result->fetch_assoc()) 
-                                        {   $GLOBALS['val2price']=$row['Cost'];
-                                        }
-                                }
-                    $sql = "SELECT Cost from food_menu WHERE `Food_Name` = '$val3'";
-                         $result = $con->query($sql);
-                            if ($result->num_rows > 0) 
-                                {while($row = $result->fetch_assoc()) 
-                                        {   $GLOBALS['val3price']=$row['Cost'];
-                                        }
-                                }
-                    $sql = "SELECT Cost from food_menu WHERE `Food_Name` = '$val4'";
-                         $result = $con->query($sql);
-                            if ($result->num_rows > 0) 
-                                {while($row = $result->fetch_assoc()) 
-                                        {   $GLOBALS['val4price']=$row['Cost'];
-                                        }
-                                }
-                    $sql = "SELECT Cost from food_menu WHERE `Food_Name` = '$val5'";
-                         $result = $con->query($sql);
-                            if ($result->num_rows > 0) 
-                                {while($row = $result->fetch_assoc()) 
-                                        {   $GLOBALS['val5price']=$row['Cost'];
-                                        }
-                                }  
-                    $sql = "SELECT Cost from food_menu WHERE `Food_Name` = '$val6'";
-                         $result = $con->query($sql);
-                            if ($result->num_rows > 0) 
-                                {while($row = $result->fetch_assoc()) 
-                                        {   $GLOBALS['val6price']=$row['Cost'];
-                                        }
-                                }          
+                                }         
     }
 
 
- function addcredit($id,$ddate,$lvlusr,$sum)
-    {
-        switch ($lvlusr) {
-            case '0':
-                     $host = 'localhost';
-                     $user = 'root';
-                     $pass = '';
-                     $db = 'cms';
-                    $con = mysqli_connect($host, $user, $pass,$db);
-
-                     $pt = $sum/5;
-                     echo "pt";
-                     
-                        $sql2 = "SELECT * from students WHERE `Stud_id`='$id'"; 
-                         $result2 = $con->query($sql2);
-
-                            if ($result2->num_rows > 0) 
-                                {  
-
-                                   while($row2 = $result2->fetch_assoc()) 
-                                        {   $point=$row2['Points'];
-                                        }
-                                }
-
-                                $b=number_format(round((float)$pt,2),2);
-                                $a=number_format(round((float)$point,2),2);
-                                $credit=$a+$b;
-
-
-                         $sql="UPDATE students SET `Points`='$credit' WHERE `Stud_id` = '$id'";
-                         if (!mysqli_query($con,$sql)) {
-                                                    die('Error: ' . mysqli_error($con));
-                                                        }
-                                                else{
-                                                 // header('location:billing.php');
-                                             }
-                       
-
-                break;
-
-            case '1':
-                    $host = 'localhost';
-                     $user = 'root';
-                     $pass = '';
-                     $db = 'cms';
-                    $con = mysqli_connect($host, $user, $pass,$db);
-
-
-                     $pt = $sum/5;
-                     echo "$pt";
-
-                        $sql2 = "SELECT * from faculty WHERE `Fa_id`='$id'"; 
-                         $result2 = $con->query($sql2);
-
-                            if ($result2->num_rows > 0) 
-                                {  
-
-                                   while($row2 = $result2->fetch_assoc()) 
-                                        {   $point=$row2['Points'];
-                                        }
-                                }
-                                $b=number_format(round((float)$pt,2),2);
-                                echo "$b";
-                                $a=number_format(round((float)$point,2),2);
-                                echo "$a";
-                                $credit=$a+$b;
-
-
-                         $sql="UPDATE faculty SET Points='$credit' WHERE `Fa_id` = '$id'";
-                         if (!mysqli_query($con,$sql)) {
-                                                    die('Error: ' . mysqli_error($con));
-                                                        }
-                                                else{
-                                                 // header('location:billing.php');
-                                             }
-                      
-                break;
-            
-            default:
-                # code...
-                break;
-            }
-            mysqli_close($con);
-        }
 function customer($id)
     {
         $host = 'localhost';
@@ -387,7 +274,7 @@ function customer($id)
             
             <tr class="details">
                 <td>
-                    Cash Payment
+                    Online Payment
                 </td>
                 <td></td>
                 <td></td>
@@ -415,48 +302,43 @@ function customer($id)
                 </td>
             </tr>
             <tr>
-                <td><?php echo "$val1"; ?></td>
-                <td><?php echo "$val1price"; ?></td>
+            <?php if($val1) { echo "<td>".$val1."</td>
+                <td>".$val1price."</td>
                 <td></td>
                 <td>1</td>
-                <td><?php echo "$val1price"; ?></td>
-
+                <td>".$val1price."</td>";}?>
             </tr>
             <tr>
-                <td><?php echo "$val2"; ?></td>
-                <td><?php echo "$val2price"; ?></td>
+                <?php if($val2) { echo "<td>".$val2."</td>
+                <td>".$val2price."</td>
                 <td></td>
                 <td>1</td>
-                <td><?php echo "$val2price"; ?></td>
+                <td>".$val2price."</td>";}?>
 
             </tr><tr>
-                <td><?php echo "$val3"; ?></td>
-                <td><?php echo "$val3price"; ?></td>
+                <?php if($val3) { echo "<td>".$val3."</td>
+                <td>".$val3price."</td>
                 <td></td>
                 <td>1</td>
-                <td><?php echo "$val3price"; ?></td>
-
+                <td>".$val3price."</td>";}?>
             </tr><tr>
-                <td><?php echo "$val4"; ?></td>
-                <td><?php echo "$val4price"; ?></td>
+               <?php if($val4) { echo "<td>".$val4."</td>
+                <td>".$val4price."</td>
                 <td></td>
                 <td>1</td>
-                <td><?php echo "$val4price"; ?></td>
-
+                <td>".$val4price."</td>";}?>
             </tr><tr>
-                <td><?php echo "$val5"; ?></td>
-                <td><?php echo "$val5price"; ?></td>
+                <?php if($val5) { echo "<td>".$val5."</td>
+                <td>".$val5price."</td>
                 <td></td>
                 <td>1</td>
-                <td><?php echo "$val5price"; ?></td>
-
+                <td>".$val5price."</td>";}?>
             </tr><tr>
-                <td><?php echo "$val6"; ?></td>
-                <td><?php echo "$val6price"; ?></td>
+                <?php if($val6) { echo "<td>".$val6."</td>
+                <td>".$val6price."</td>
                 <td></td>
                 <td>1</td>
-                <td><?php echo "$val6price"; ?></td>
-
+                <td>".$val6price."</td>";}?>
             </tr>
             
             <tr class="total">
@@ -476,9 +358,12 @@ function customer($id)
     </div>
     <div>
     <div class="span2">
-        <form action="#" method="post">
-            <center><button name="cancel"">Print</button></center>
-        </form>
+        <form action="/canteen/faculty/paynow.php" method="post">
+            <center><button style="font-size: 35px;" name="print">PAY NOW</button></form>
+
+         <form action="/canteen/faculty/paylater.php" method="post"><button style="font-size: 35px;" name="paylater">PAY LATER</button></center></form>
+            
+        
          
     </div>
     </div>

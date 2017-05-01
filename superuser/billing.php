@@ -65,9 +65,7 @@ function validatecid($ddate,$dcid,$dfid,$dqty)
                                     getname($ddate,$dcid,$dfid,$dqty);         
                                 }
                             else{
-                              echo '<script language="javascript">';
-                              echo 'alert("Enter a valid Customer ID")';
-                              echo '</script>';
+                              header('location:/canteen/superuser/billing.php');
                                 }    
 
                             if (!mysqli_query($con,$sql)) {

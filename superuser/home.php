@@ -69,7 +69,7 @@ function dailyfood($dfid,$ddate)
         if (!$con) {
             die('Can not connect mysqli');
             exit;}
-            $sql = " INSERT INTO `food_menu`(`Food_Name`, `Food_id`, `Quantity`, `Cost`) VALUES ('$afid','$afname','$aprice','$aqty')"; 
+            $sql = " INSERT INTO `food_menu`(`Food_Name`, `Food_id`, `Quantity`, `Cost`) VALUES ('$afname','$afid','$aqty','$aprice')"; 
 
              if (!mysqli_query($con,$sql)) {
                    die('Error: ' . mysqli_error($con));
@@ -269,7 +269,7 @@ function collection($dfid,$ddate)
 
         
         <div class="footer">
-            <p>&copy;2017</p>
+            <p>&copy; 2018 Batch. MiniProject | Designed by TechKnightz</p>
         </div>
         <!-- Footer section end -->
         <!-- ScrollUp button start -->

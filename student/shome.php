@@ -9,6 +9,8 @@ if(isset($_SESSION['cid'])){
     exit();
 }
 
+
+
 if(isset($_SESSION['cid']))
 	{
 		student($id);
@@ -20,6 +22,25 @@ if (isset($_POST['message']))
 			msgstore($msg,$id);
 	}
 
+	$host = 'localhost';
+	$user = 'root';
+	$pass = '';
+	$db = 'cms';
+
+	$con = mysqli_connect($host, $user, $pass,$db);
+	if (!$con) {
+    	die('Can not connect mysqli');
+    	exit;}
+    	$sql = "SELECT * from feedback WHERE `C_id`='$id'";
+        	$result = $con->query($sql);
+                           if ($result->num_rows > 0)
+                            {
+                            	// output data of each row
+                            	while($row = $result->fetch_assoc())
+                            		{
+                            			$array=$row['Responses'];
+                            	 	}
+                            }
 
 function student($id)
 	{
@@ -175,7 +196,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<ul>
 				<li><a href="shome.php"><span class="glyphicon glyphicon-file"></span>HOME</a></li>
 				<li><a href="preorder.php"><span class="glyphicon glyphicon-envelope"></span>PREBOOKING</a></li>
-				<li><a href="action/logout.php">SIGN OUT</a></li>
+				
+				<li class="dropdown at-drop">
+		              <a href="#" class="dropdown-toggle dropdown-at " data-toggle="dropdown"><i class="fa fa-globe"></i> <span class="number">RESPONSES</span></a>
+		              <ul class="dropdown-menu menu1 " role="menu">
+		                <li><a href="#">
+		                	<div class="user-new">
+		                	<p style="font-size: 20px;"><?php echo "$array"; ?></p>
+		                	</div>
+		                	<div class="user-new-left">
+
+		                	<i class="fa fa-rss"></i>
+		                	</div>
+		                	<div class="clearfix"> </div>
+		                </a></li>
+		              </ul>
+		            </li>
+		            <li><a href="action/logout.php">SIGN OUT</a></li>
 			</ul>
 		</div>
 	</div>
@@ -230,7 +267,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 		<div class="col-md-12 capabil-grid text-center">
 			<div class='numscroller numscroller-big-bottom' data-slno='1' data-min='0' data-max='<?php echo "$points"; ?>' data-delay='.5' data-increment="1"><?php echo "$points"; ?></div>
-			<p><h1>CREDITS ACHIEVED</h1></p>
+			<p><h1>CREDITS ACHIEVED</h1> When you cross each 100 points on your credit redeem your gift from CANTEEN</p>
 		</div>
 		<div class="clearfix"></div>
 	</div>
@@ -251,16 +288,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
               <div id="respond" class="contact">
                 <div class="container">
-                  <h3 class="tittle">RESPONSE</h3>
-                  <div class="col-md-12 contact-left ">
-
-                    <div class="horizontal-tab">
-                        <div class="contact-form">
-                            <form method="POST">
-                              <textarea  type="text" name="message" required></textarea>
-                              <!-- <input type="submit" value="SEND" > -->
-                            </form>
-                            </div>
+                 
                           </div>
                           </div>
 
